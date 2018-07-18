@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-class CommentContent extends Component {
+class FormPostComment extends Component {
 	onHandleSubmit = ev => {
 		ev.preventDefault();
 		const { addComment, statusAuthor } = this.props;
 		const comment = {
-			statusAuthor: statusAuthor,
 			commnetAuthor: this.refs.commentAuthor.value,
 			commentContent: this.refs.commentContent.value,
 		};
-		addComment(comment);
+		console.log('formpost');
+		addComment(statusAuthor,comment);
 
 		this.refs.commentAuthor.value = '';
 		this.refs.commentContent.value = '';
@@ -44,4 +44,4 @@ class CommentContent extends Component {
 	}
 }
 
-export default CommentContent;
+export default FormPostComment;

@@ -1,46 +1,27 @@
 import React, { Component } from 'react';
 import CommentContent from './CommentContent';
 import FormPostComment from './FormPostComment';
+import _ from 'lodash';
 
 class Status extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			listComments: [
-				{
-					statusAuthor: '',
-					listComment: [
-						{
-							commnetAuthor: '',
-							commentContent: '',
-						},
-					],
-				},
-			],
-		};
-	}
-
-	componentWillReceiveProps() {
-		const { isNews } = this.props;
-		if (isNews === true) {
-			this.setState({
-				listComment: [],
-			});
-		}
-	}
-
-	addComment = comment => {
-		this.setState({
-			listComment: [...this.state.listComment, comment],
-		});
-	};
 
 	render() {
-		const { listStatus, isNews } = this.props;
-		const { listComment } = this.state;
+		const { listStatus, isNews, listComments, addComment } = this.props;
+		const statusAuthor = listStatus[listStatus.length - 1].author;
+		console.log(statusAuthor)
+
+		// const listStatusComment = listComments[index].listComment;
+		// console.log(listStatusComment)
 
 		const status = listStatus.map((e, i) => {
-			if (e.author !== '')
+
+			if (e.author !== '') {
+				let index = _.findIndex(listComments, (elm) => {
+					return elm.statusAuthor == e.author;
+				})
+				console.log(index);
+				const listStatusComment = [...listComments[index]['listComment' + index]];
+				console.log(listStatusComment)
 				return (
 					<div className="item white shadow cf" key={i}>
 						<div className="row padding margin-left">
@@ -83,11 +64,15 @@ class Status extends Component {
 							</div>
 						</div>
 						<div className="row padding ml--size">
-							<FormPostComment addComment={this.addComment} statusAuthor={e.author} />
-							<CommentContent listComment={listComment} />
+							<FormPostComment addComment={addComment} statusAuthor={e.author} />
+							<CommentContent
+								listComment={listStatusComment}
+							/>
 						</div>
 					</div>
 				);
+			}
+
 		});
 		return <div>{status}</div>;
 	}

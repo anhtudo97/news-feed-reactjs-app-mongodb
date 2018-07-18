@@ -25,7 +25,9 @@ class CommentContent extends Component {
 				);
 		});
 
-		return <div>{comments}</div>;
+		return <div>
+			{comments}
+		</div>;
 	}
 }
 

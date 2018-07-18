@@ -4,7 +4,7 @@ class FormPostStatus extends Component {
 
     onHandleSubmit = (ev) => {
         ev.preventDefault();
-        const { addStatus,newStatus } = this.props;
+        const { addStatus, newStatus, updateListComment } = this.props;
         const status = {
             author: this.refs.author.value,
             title: this.refs.title.value,
@@ -12,6 +12,7 @@ class FormPostStatus extends Component {
         }
         addStatus(status);
         newStatus();
+        updateListComment(this.refs.author.value);
 
         this.refs.author.value = '';
         this.refs.title.value = '';
