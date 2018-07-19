@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import FormPostStatus from './components/FormPostStatus';
 import Status from './components/Status';
 import _ from 'lodash';
+
 import './index.css';
 
 class App extends Component {
@@ -46,6 +48,28 @@ class App extends Component {
 			listComments: listComments,
 			numberList: numberList
 		})
+
+		var stringifyObj = JSON.stringify(listComments);
+		var obj = JSON.parse(stringifyObj);
+
+		// call api to save to database
+		// fetch('/status', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(obj),
+		// 	headers: { "Content-Type": "application/json" }
+		// })
+		// 	.then(function (response) {
+		// 		console.log(response)
+		// 		return response.json()
+		// 	}).then(function (body) {
+		// 		console.log(body);
+		// 	});
+		console.log(obj)
+		axios.post(`/status`, obj)
+			.then(res => {
+				console.log(res);
+				console.log(res.data);
+			})
 	}
 
 	newStatus = () => {
@@ -68,9 +92,6 @@ class App extends Component {
 		console.log(index);
 		if (index !== -1) {
 			console.log(listComments[index])
-
-			//let nameListComment = 'listComment'+index;
-
 			listComments[index]['listComment' + index] = [...listComments[index]['listComment' + index],
 				comment];
 			this.setState({

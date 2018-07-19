@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class FormPostComment extends Component {
 	onHandleSubmit = ev => {
 		ev.preventDefault();
 		const { addComment, statusAuthor } = this.props;
-		const comment = {
-			commnetAuthor: this.refs.commentAuthor.value,
-			commentContent: this.refs.commentContent.value,
-		};
-		console.log('formpost');
-		addComment(statusAuthor,comment);
 
+		// get data from input form
+		const commnetAuthor = this.refs.commentAuthor.value;
+		const commentContent = this.refs.commentContent.value;
+
+		const comment = {
+			commnetAuthor: commnetAuthor,
+			commentContent: commentContent,
+		};
+
+		console.log('formpost');
+		addComment(statusAuthor, comment);
+
+		// call api to save to database
+		// fetch("/status", {
+		// 	method: "POST",
+		// 	body: JSON.stringify(comment)
+		// })
+		// 	.then((res) => {
+		// 		if (res.ok) {
+		// 			return res.json();
+		// 		} else {
+		// 			throw new Error('Something went wrong with your fetch');
+		// 		}
+		// 	}).then((json) => {
+		// 		console.log(json);
+		// 	})
+
+		// set default is empty for input form
 		this.refs.commentAuthor.value = '';
 		this.refs.commentContent.value = '';
+
 	};
 
 	render() {

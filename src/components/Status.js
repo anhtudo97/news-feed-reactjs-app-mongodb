@@ -10,14 +10,11 @@ class Status extends Component {
 		const statusAuthor = listStatus[listStatus.length - 1].author;
 		console.log(statusAuthor)
 
-		// const listStatusComment = listComments[index].listComment;
-		// console.log(listStatusComment)
-
 		const status = listStatus.map((e, i) => {
 
 			if (e.author !== '') {
 				let index = _.findIndex(listComments, (elm) => {
-					return elm.statusAuthor == e.author;
+					return elm.statusAuthor === e.author;
 				})
 				console.log(index);
 				const listStatusComment = [...listComments[index]['listComment' + index]];

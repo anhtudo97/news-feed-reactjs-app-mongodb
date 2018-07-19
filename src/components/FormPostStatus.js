@@ -1,22 +1,46 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class FormPostStatus extends Component {
 
     onHandleSubmit = (ev) => {
         ev.preventDefault();
         const { addStatus, newStatus, updateListComment } = this.props;
+
+        const author = this.refs.author.value;
+        const title = this.refs.title.value;
+        const content = this.refs.commnentContent.value;
+
         const status = {
-            author: this.refs.author.value,
-            title: this.refs.title.value,
-            content: this.refs.commnentContent.value,
+            author: author,
+            title: title,
+            content: content,
         }
         addStatus(status);
         newStatus();
         updateListComment(this.refs.author.value);
 
+        // call api to save to database
+        // fetch("/status", {
+        //     method: "POST",
+        //     body: JSON.stringify(status)
+        // })
+        //     .then((res) => {
+        //         if (res.ok) {
+        //             return res.json();
+        //         } else {
+        //             throw new Error('Something went wrong with your fetch');
+        //         }
+        //     }).then((json) => {
+        //         console.log(json);
+        //     })
+
+        // Set default is empty for form
         this.refs.author.value = '';
         this.refs.title.value = '';
         this.refs.commnentContent.value = ''
+
+
     }
 
     render() {
