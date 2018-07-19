@@ -19,24 +19,19 @@ class FormPostComment extends Component {
 		addComment(statusAuthor, comment);
 
 		// call api to save to database
-		// fetch("/status", {
-		// 	method: "POST",
-		// 	body: JSON.stringify(comment)
-		// })
-		// 	.then((res) => {
-		// 		if (res.ok) {
-		// 			return res.json();
-		// 		} else {
-		// 			throw new Error('Something went wrong with your fetch');
-		// 		}
-		// 	}).then((json) => {
-		// 		console.log(json);
-		// 	})
+		axios
+			.post(`/Comments`, {
+				statusAuthor: statusAuthor,
+				comment: comment,
+			})
+			.then(res => {
+				console.log(res);
+				console.log(res.data);
+			});
 
 		// set default is empty for input form
 		this.refs.commentAuthor.value = '';
 		this.refs.commentContent.value = '';
-
 	};
 
 	render() {

@@ -6,9 +6,8 @@ import _ from 'lodash';
 class Status extends Component {
 
 	render() {
-		const { listStatus, isNews, listComments, addComment } = this.props;
+		const { listStatus, listComments, addComment } = this.props;
 		const statusAuthor = listStatus[listStatus.length - 1].author;
-		console.log(statusAuthor)
 
 		const status = listStatus.map((e, i) => {
 
@@ -16,9 +15,7 @@ class Status extends Component {
 				let index = _.findIndex(listComments, (elm) => {
 					return elm.statusAuthor === e.author;
 				})
-				console.log(index);
 				const listStatusComment = [...listComments[index]['listComment' + index]];
-				console.log(listStatusComment)
 				return (
 					<div className="item white shadow cf" key={i}>
 						<div className="row padding margin-left">
@@ -61,7 +58,7 @@ class Status extends Component {
 							</div>
 						</div>
 						<div className="row padding ml--size">
-							<FormPostComment addComment={addComment} statusAuthor={e.author} />
+							<FormPostComment addComment={addComment} statusAuthor={e.author} listComments={listComments}/>
 							<CommentContent
 								listComment={listStatusComment}
 							/>
